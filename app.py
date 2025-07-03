@@ -13,7 +13,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- FUNÇÕES CORE (LÓGICA ADAPTADA DO COLAB) ---
+# --- FUNÇÕES CORE ---
 
 def format_brl(value):
     """Formata um número para o padrão brasileiro (1.234,56)"""
@@ -81,18 +81,20 @@ with tab1:
         with col1:
             w_escritorio = st.selectbox("Escritório*", ["ASBZ SP", "ZUCCA BSB", "CONSULTING"], key="ind_esc")
             w_solicitante = st.text_input("Solicitante (Sigla)*", key="ind_sol")
-            w_cliente = st.text_input("Cliente", key="ind_cli", help="Opcional. Pode começar com zero (ex: 007).")
+            # MUDANÇA AQUI: Removido o ícone de ajuda (parâmetro help)
+            w_cliente = st.text_input("Cliente", key="ind_cli")
             w_tipo_despesa = st.selectbox("Tipo de Despesa*", ["MOTOCA", "CARTÓRIO", "CORREIOS", "OUTROS"], key="ind_tipo_desp")
             w_reembolsavel = st.radio("Reembolsável?*", ["SIM", "NÃO"], horizontal=True, key="ind_reemb")
         
         with col2:
             w_centro_custo = st.text_input("Centro de Custo", key="ind_cc")
-            w_os_caso = st.text_input("OS/Caso", key="ind_os", help="Opcional. Pode começar com zero (ex: 001).")
+            # MUDANÇA AQUI: Removido o ícone de ajuda (parâmetro help)
+            w_os_caso = st.text_input("OS/Caso", key="ind_os")
             w_total_rs = st.number_input("Total R$*", format="%.2f", key="ind_total")
             w_data_despesa = st.date_input("Data da Despesa*", key="ind_data")
-            w_adiantamento = st.radio("Tem adiantamento?*", ["SIM", "NÃO"], horizontal=True, key="ind_adiant")
+            # MUDANÇA AQUI: Texto do rótulo alterado
+            w_adiantamento = st.radio("Tem adiantamento do cliente*", ["SIM", "NÃO"], horizontal=True, key="ind_adiant")
 
-        # MUDANÇA AQUI: Campo Observação volta a ser opcional.
         w_observacao = st.text_area("Observação (Opcional)", height=150, key="ind_obs")
         
         submitted = st.form_submit_button("Gerar DEBIT")
